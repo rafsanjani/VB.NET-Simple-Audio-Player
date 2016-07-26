@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AC798D6A-0883-4EEE-8ACF-BF3701EDB8E6}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>Simple_Audio_Player.My.MyApplication</StartupObject>
+    <RootNamespace>Simple_Audio_Player</RootNamespace>
+    <AssemblyName>Simple Audio Player</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>Simple Audio Player.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>Simple Audio Player.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>myICON.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Animation">
+      <HintPath>C:\Users\RAFS\Documents\EGDownloads\Compressed\VUMeter-by-bEGI\VU Meter\Animation.dll</HintPath>
+    </Reference>
+    <Reference Include="ColorSlider">
+      <HintPath>C:\Users\RAFS\Documents\EGDownloads\Compressed\ColorSlider_demo\ColorSlider.dll</HintPath>
+    </Reference>
+    <Reference Include="CoreAudioApi">
+      <HintPath>C:\Users\RAFS\Documents\EGDownloads\Compressed\VUMeter-by-bEGI\VU Meter\EXTERNAL RESOURCES\COREAUDIOAPI.DLL\.NET 4 DLL [x86]\CoreAudioApi.dll</HintPath>
+    </Reference>
+    <Reference Include="DevComponents.DotNetBar2, Version=12.0.0.1, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04" />
+    <Reference Include="SkinSoft.VisualStyler, Version=2.4.0.0, Culture=neutral, PublicKeyToken=0fda9f423e1d9830, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.SQLite, Version=1.0.99.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="taglib-sharp, Version=2.1.0.0, Culture=neutral, PublicKeyToken=db62eba44689b5b0, processorArchitecture=MSIL">
+      <HintPath>..\packages\taglib.2.1.0.0\lib\taglib-sharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="VIBlend.WinForms.Controls, Version=10.1.0.0, Culture=neutral, PublicKeyToken=6feea38fef5ea0cf, processorArchitecture=MSIL" />
+    <Reference Include="VIBlend.WinForms.Utilities, Version=10.1.0.0, Culture=neutral, PublicKeyToken=970a5af59bc48043" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Audio.vb" />
+    <Compile Include="AudioAPI.vb" />
+    <Compile Include="infoForm.Designer.vb">
+      <DependentUpon>infoForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="infoForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="mainForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="mainForm.Designer.vb">
+      <DependentUpon>mainForm.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logo_UC.Designer.vb">
+      <DependentUpon>Logo_UC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Logo_UC.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Music.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="pictureForm.Designer.vb">
+      <DependentUpon>pictureForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="pictureForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Spectrum_UC.Designer.vb">
+      <DependentUpon>Spectrum_UC.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Spectrum_UC.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="infoForm.resx">
+      <DependentUpon>infoForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="mainForm.resx">
+      <DependentUpon>mainForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Logo_UC.resx">
+      <DependentUpon>Logo_UC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pictureForm.resx">
+      <DependentUpon>pictureForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Spectrum_UC.resx">
+      <DependentUpon>Spectrum_UC.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bass.dll" />
+    <Content Include="myICON.ico" />
+    <Content Include="PROC.txt" />
+    <None Include="Resources\Untitled-1.png" />
+    <None Include="Resources\DEFAULT_ALBUM_ART.jpg" />
+    <None Include="Resources\123031540072I0Uc.jpg" />
+    <None Include="Resources\beautiful-background.jpg" />
+    <None Include="Resources\backgroundimage.jpg" />
+    <None Include="Resources\background.jpg" />
+    <None Include="Resources\shuffle_icon_pressed.png" />
+    <None Include="Resources\shuffle_icon_normal.png" />
+    <None Include="Resources\repeat_icon_pressed.png" />
+    <None Include="Resources\repeat_icon_normal.png" />
+    <None Include="Resources\1459709386_button-synchronize_sticker.png" />
+    <None Include="Resources\play_icon_normal.png" />
+    <None Include="Resources\stop_icon_pressed.png" />
+    <None Include="Resources\stop_icon_normal.png" />
+    <None Include="Resources\Sound-on48.png" />
+    <None Include="Resources\Sound-off48.png" />
+    <None Include="Resources\previous_icon_pressed.png" />
+    <None Include="Resources\previous_icon_normal.png" />
+    <None Include="Resources\play_icon_pressed.png" />
+    <None Include="Resources\paused_icon_pressed.png" />
+    <None Include="Resources\paused_icon_normal.png" />
+    <None Include="Resources\open_icon_pressed.png" />
+    <None Include="Resources\open_icon_normal.png" />
+    <None Include="Resources\next_icon_pressed.png" />
+    <None Include="Resources\next_icon_normal.png" />
+    <None Include="Resources\Eject48.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
