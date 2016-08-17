@@ -20,13 +20,13 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		VSStyle = Cybertron (trapter).vssf
-		VSTargetControls = FormsAndControls
-		VSToolStripStyle = Mixed
-		VSTextShadow = True
-		VSSkinFlatStyles = True
-		VSSkinToggleButtons = True
-		VSUseSystemFonts = False
 		VSCustomBkgrdPaint = True
+		VSUseSystemFonts = False
+		VSSkinToggleButtons = True
+		VSSkinFlatStyles = True
+		VSTextShadow = True
+		VSToolStripStyle = Mixed
+		VSTargetControls = FormsAndControls
+		VSStyle = XP Royale (Zune).vssf
 	EndGlobalSection
 EndGlobal

@@ -31,7 +31,7 @@ Partial Class pictureForm
         '
         'Timer1
         '
-        Me.Timer1.Interval = 50
+        Me.Timer1.Interval = 10
         '
         'imageArea
         '
@@ -44,7 +44,7 @@ Partial Class pictureForm
         '
         'Timer2
         '
-        Me.Timer2.Interval = 50
+        Me.Timer2.Interval = 10
         '
         'pictureForm
         '

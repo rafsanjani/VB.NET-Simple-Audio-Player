@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class mainForm
+Partial Class MainForm
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -23,7 +23,7 @@ Partial Class mainForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(mainForm))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainForm))
         Me.pnlSongInfo = New System.Windows.Forms.Panel()
         Me.lblPlayerState = New System.Windows.Forms.Label()
         Me.lblSongInfo = New System.Windows.Forms.Label()
@@ -73,10 +73,11 @@ Partial Class mainForm
         '
         'pnlSongInfo
         '
-        Me.pnlSongInfo.BackColor = System.Drawing.Color.DimGray
+        Me.pnlSongInfo.BackColor = System.Drawing.Color.FromArgb(CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer), CType(CType(100, Byte), Integer))
         Me.pnlSongInfo.Controls.Add(Me.lblPlayerState)
         Me.pnlSongInfo.Controls.Add(Me.lblSongInfo)
-        Me.pnlSongInfo.Location = New System.Drawing.Point(-4, 1)
+        Me.pnlSongInfo.Dock = System.Windows.Forms.DockStyle.Top
+        Me.pnlSongInfo.Location = New System.Drawing.Point(0, 0)
         Me.pnlSongInfo.Name = "pnlSongInfo"
         Me.pnlSongInfo.Size = New System.Drawing.Size(362, 32)
         Me.pnlSongInfo.TabIndex = 0
@@ -85,19 +86,20 @@ Partial Class mainForm
         '
         Me.lblPlayerState.AutoSize = True
         Me.lblPlayerState.Font = New System.Drawing.Font("Cooper Black", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPlayerState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.lblPlayerState.Location = New System.Drawing.Point(4, 8)
+        Me.lblPlayerState.ForeColor = System.Drawing.Color.Black
+        Me.lblPlayerState.Location = New System.Drawing.Point(0, 10)
         Me.lblPlayerState.Name = "lblPlayerState"
-        Me.lblPlayerState.Size = New System.Drawing.Size(0, 14)
+        Me.lblPlayerState.Size = New System.Drawing.Size(52, 14)
         Me.lblPlayerState.TabIndex = 13
+        Me.lblPlayerState.Text = "Playing"
         '
         'lblSongInfo
         '
         Me.lblSongInfo.AutoSize = True
         Me.lblSongInfo.BackColor = System.Drawing.Color.Transparent
         Me.lblSongInfo.Font = New System.Drawing.Font("Lucida Fax", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSongInfo.ForeColor = System.Drawing.Color.White
-        Me.lblSongInfo.Location = New System.Drawing.Point(82, 7)
+        Me.lblSongInfo.ForeColor = System.Drawing.SystemColors.ButtonFace
+        Me.lblSongInfo.Location = New System.Drawing.Point(82, 9)
         Me.lblSongInfo.Name = "lblSongInfo"
         Me.lblSongInfo.Size = New System.Drawing.Size(555, 15)
         Me.lblSongInfo.TabIndex = 12
@@ -119,7 +121,7 @@ Partial Class mainForm
         Me.VisualStyler2.HookVisualStyles = True
         Me.VisualStyler2.HostForm = Me
         Me.VisualStyler2.License = CType(resources.GetObject("VisualStyler2.License"), SkinSoft.VisualStyler.Licensing.VisualStylerLicense)
-        Me.VisualStyler2.LoadVisualStyle(Nothing, "Cybertron (trapter).vssf")
+        Me.VisualStyler2.LoadVisualStyle(Nothing, "XP Royale (Zune).vssf")
         '
         'bw
         '
@@ -273,13 +275,15 @@ Partial Class mainForm
         Me.lvPlaylist.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.Title, Me.Time})
         Me.lvPlaylist.ContextMenuStrip = Me.playlistCtxMenu
         Me.lvPlaylist.DisabledBackColor = System.Drawing.Color.Empty
+        Me.lvPlaylist.Font = New System.Drawing.Font("Comic Sans MS", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lvPlaylist.ForeColor = System.Drawing.Color.White
         Me.lvPlaylist.FullRowSelect = True
         Me.lvPlaylist.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
+        Me.lvPlaylist.HideSelection = False
         Me.lvPlaylist.LabelWrap = False
         Me.lvPlaylist.Location = New System.Drawing.Point(3, 204)
         Me.lvPlaylist.Name = "lvPlaylist"
-        Me.lvPlaylist.Size = New System.Drawing.Size(351, 262)
+        Me.lvPlaylist.Size = New System.Drawing.Size(357, 315)
         Me.lvPlaylist.TabIndex = 11
         Me.lvPlaylist.UseCompatibleStateImageBehavior = False
         Me.lvPlaylist.View = System.Windows.Forms.View.Details
@@ -360,13 +364,13 @@ Partial Class mainForm
         Me.plLoader.WorkerReportsProgress = True
         Me.plLoader.WorkerSupportsCancellation = True
         '
-        'mainForm
+        'MainForm
         '
         Me.AllowDrop = True
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.Black
-        Me.ClientSize = New System.Drawing.Size(356, 469)
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.ClientSize = New System.Drawing.Size(362, 522)
         Me.Controls.Add(Me.shuffleButton)
         Me.Controls.Add(Me.repeatButton)
         Me.Controls.Add(Me.VArrowButton1)
@@ -385,7 +389,7 @@ Partial Class mainForm
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
-        Me.Name = "mainForm"
+        Me.Name = "MainForm"
         Me.Text = "RAFS SIMPLE AUDIO PLAYER"
         Me.pnlSongInfo.ResumeLayout(False)
         Me.pnlSongInfo.PerformLayout()

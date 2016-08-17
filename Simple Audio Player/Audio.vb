@@ -1,22 +1,26 @@
-﻿Public Class Audio
+﻿Imports System.ComponentModel
+
+Public Class Audio
     Implements IDisposable
 
     Dim stream As IntPtr = Nothing
 
     Private fileName As String
 
+
+
     Private Const BASS_POS_BYTE As UInteger = 0
     Private Const BASS_DEVICE_DEFAULT As UInteger = 2
     Private Const BASS_ATTRIB_VOL As UInteger = 2
     Private fileLoaded As Boolean
 
-    Public length As Long
+    Private length As Long
 
     'BASS PLAYER STATES
-    Private Const BASS_ACTIVE_STOPPED As UInteger = 0
-    Private Const BASS_ACTIVE_PLAYING As UInteger = 1
-    Private Const BASS_ACTIVE_STALLED As UInteger = 2
-    Private Const BASS_ACTIVE_PAUSED As UInteger = 3
+    'Private Const BASS_ACTIVE_STOPPED As UInteger = 0
+    'Private Const BASS_ACTIVE_PLAYING As UInteger = 1
+    'Private Const BASS_ACTIVE_STALLED As UInteger = 2
+    'Private Const BASS_ACTIVE_PAUSED As UInteger = 3
 
 
     'PLAYER EVENTS
@@ -45,7 +49,8 @@
     Private Declare Function BASS_SampleFree Lib "bass.dll" (ByVal handle As IntPtr) As Boolean
     Private Declare Function BASS_SampleGetChannel Lib "bass.dll" (ByVal handle As IntPtr, ByVal onlynew As Boolean) As IntPtr
     Private Declare Function BASS_SampleStop Lib "bass.dll" (ByVal handle As IntPtr) As Boolean
-
+    Private Declare Function BASS_ChannelGetAttribute Lib "bass.dll" (handle As IntPtr, attrib As IntPtr, ByRef output As Double) As Double
+    Private Declare Function BASS_GetVolume Lib "bass.dll" () As Double
 
     Public Sub New(Optional ByVal fileName As String = "")
         BASS_Init(-1, 44100, BASS_DEVICE_DEFAULT, IntPtr.Zero, Nothing)
@@ -55,9 +60,12 @@
     Private Sub SetDevice()
         BASS_ChannelSetDevice(stream, 1)
     End Sub
-    Public Function PlayMusic(ByVal fileName As String) As Boolean
+
+    
+
+
+    Public Function PlayMusic(fileName As String) As Boolean
         Me.fileName = fileName
-        'SetDevice()
         stream = BASS_StreamCreateFile(False, fileName, 0, 0, 0, 0, 0)
 
         If BASS_ChannelPlay(stream, False) Then
@@ -73,9 +81,9 @@
     End Function
 
 
-    Public Function GetDevice() As Integer
-        Return BASS_ChannelGetDevice(stream)
-    End Function
+    'Public Function GetDevice() As Integer
+    '    Return BASS_ChannelGetDevice(stream)
+    'End Function
 
     Public Function GetPosition() As Long
         Return BASS_ChannelGetPosition(stream, BASS_POS_BYTE)
@@ -129,6 +137,7 @@
         BASS_ChannelSetAttribute(stream, BASS_ATTRIB_VOL, value)
     End Sub
 
+
     Enum PlayerStates
         Playing
         Stopped
@@ -139,12 +148,12 @@
     Public Sub StopMusic()
         BASS_ChannelStop(stream)
         BASS_StreamFree(stream)
-        'BASS_StreamFree(stream)
+
         fileLoaded = False
         RaiseEvent MediaStopped()
     End Sub
 
-    Public Sub CheckCondition()
+    Public Sub CheckPlayerState()
         If GetPosition() = GetLength() Then
             RaiseEvent MediaCompleted()
         End If
@@ -168,20 +177,5 @@
         StopMusic()
         BASS_Free()
     End Sub
-
-    Private Function Shuffle(ByVal strTempList As List(Of String)) As List(Of String)
-        'Shuffle a list of music randomly.
-        Dim rand As New Random
-        Dim strResult As New List(Of String)
-
-        Dim i As Integer
-
-        For j As Integer = 1 To strTempList.Count
-            i = rand.Next(0, strTempList.Count)
-            strResult.Add(strTempList.Item(i))
-            strTempList.RemoveAt(i)
-        Next
-        Return strResult
-    End Function
 End Class
 
