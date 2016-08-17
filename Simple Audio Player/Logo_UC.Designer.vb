@@ -28,6 +28,7 @@ Partial Class Logo_UC
         'Panel1
         '
         Me.Panel1.BackgroundImage = Global.Simple_Audio_Player.My.Resources.Resources.Untitled_1
+        Me.Panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.Panel1.Location = New System.Drawing.Point(3, 3)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(276, 76)

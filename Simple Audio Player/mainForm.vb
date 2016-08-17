@@ -1057,4 +1057,13 @@ Public Class MainForm
     End Sub
 
 
+    Private Sub playButton_MouseLeave(sender As Object, e As MouseEventArgs) Handles playButton.MouseUp
+
+    End Sub
+    Private Sub PictureBox1_MouseEnter(sender As Object, e As MouseEventArgs) Handles playButton.MouseDown
+
+    End Sub
+    Private Sub stopButton_Click(sender As Object, e As MouseEventArgs) Handles stopButton.MouseDown
+
+    End Sub
 End Class
