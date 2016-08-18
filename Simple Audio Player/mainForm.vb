@@ -1,15 +1,9 @@
-﻿Imports System.Runtime.InteropServices
-Imports System.ComponentModel
+﻿Imports System.ComponentModel
 Imports System.IO
 Imports System.Text
-Imports System.Windows.Forms.ListView
-Imports Animation
-Imports System.Timers
 Imports System.Xml
 Imports Microsoft.VisualBasic.FileIO
 
-
-'Imports System.Data.SQLite
 
 Public Class MainForm
     Private WithEvents MusicControl As New Audio()
@@ -156,10 +150,10 @@ Public Class MainForm
         MusicControl.SetVolume(trkVolumeSlider.Value / 10)
     End Sub
 
-    'DEBUGGING CONTROL
-    Private Sub ShowLog(ByVal msg As Object)
-        '  rtb.Text = msg.ToString() + vbNewLine + rtb.Text + "------------------------"
-    End Sub
+    ''DEBUGGING CONTROL
+    'Private Sub ShowLog(ByVal msg As Object)
+    '    '  rtb.Text = msg.ToString() + vbNewLine + rtb.Text + "------------------------"
+    'End Sub
 
     Private Sub stopButton_Click_1(sender As Object, e As EventArgs) Handles stopButton.Click
         ' Dim currentVolume = CDbl(lblVolText.Text / 10)
@@ -441,7 +435,7 @@ Public Class MainForm
 
         MusicControl.SetVolume(trkVolumeSlider.Value / 10)
         lblVolText.Text = (trkVolumeSlider.Value * 10).ToString() + "%"
-        Me.Location = My.Settings.Location
+        Location = My.Settings.Location
 
         'Loadplaylist and leave the rest to the background thread to handle
         'LoadPlaylist()
@@ -451,9 +445,9 @@ Public Class MainForm
 
     End Sub
 
-    Private Function LoadPlaylist() As Boolean
+    Private Sub LoadPlaylist()
 
-        Dim mitem As ListViewItem = Nothing
+        Dim mitem As ListViewItem
 
         Dim doc As New XmlDocument
         doc.Load(Application.StartupPath + "\Playlist.xml")
@@ -476,10 +470,10 @@ Public Class MainForm
         GC.Collect()
         GC.WaitForPendingFinalizers()
 
-        Return nl.Count
-    End Function
+        'Return nl.Count
+    End Sub
     Private Sub SaveSettings()
-        My.Settings.Location = Me.Location
+        My.Settings.Location = Location
 
         My.Settings.Volume = (trkVolumeSlider.Value)
         My.Settings.LastFileIndex = _playingFileIndex
@@ -614,7 +608,6 @@ Public Class MainForm
 
         lblDuration.Text = ds.Minutes.ToString + ":" + ds.Seconds.ToString("D2") + "/" + mins.ToString + ":" + secs.ToString("D2")
 
-
         UpdateSlider()
     End Sub
 
@@ -703,7 +696,8 @@ Public Class MainForm
         lvPlaylist.Items(_playingFileIndex).SubItems(1).BackColor = Color.Aquamarine
         lvPlaylist.Items(_playingFileIndex).SubItems(1).ForeColor = Color.Black
     End Sub
-    Public Sub UpdateSlider()
+
+    Private Sub UpdateSlider()
 
         Dim a As Int32 = MusicControl.GetPosition / 100
 
@@ -765,12 +759,12 @@ Public Class MainForm
 
         Do
             ranNum = rnd.Next(0, plstCount)
-            ShowLog("doing")
+            '  ShowLog("doing")
         Loop While IsPlayed(ranNum)
 
         If _playedItems.Count - 1 = lvPlaylist.Items.Count Then
             _playedItems.Clear()
-            ShowLog("clearing list")
+            ' ShowLog("clearing list")
         Else
 
         End If
@@ -790,7 +784,7 @@ Public Class MainForm
             Return False
         Else
             If _playedItems.Contains(index) Then
-                ShowLog("exists")
+                'ShowLog("exists")
                 Return True
             End If
         End If
@@ -842,8 +836,8 @@ Public Class MainForm
 
         '  ShowLog(target.ToString + " " + Me.Height.ToString)
         If playlistShown Then
-            If Me.Height > target Then
-                Me.Height = Me.Height - 9
+            If Height > target Then
+                Height = Height - 20
 
             Else
                 playlistShown = False
@@ -857,8 +851,8 @@ Public Class MainForm
             End If
 
         Else
-            If Me.Height < targetShn Then
-                Me.Height = Me.Height + 9
+            If Height < targetShn Then
+                Height = Height + 20
 
             Else
 
@@ -1029,11 +1023,11 @@ Public Class MainForm
     End Sub
 
     Private Sub plLoader_DoWork(sender As Object, e As DoWorkEventArgs) Handles plLoader.DoWork
-        Me.Invoke(Sub() Me.Visible = False)
+        Invoke(Sub() Visible = False)
         LoadPlaylist()
     End Sub
 
-    Dim x As Int16 = 0
+    ' Dim x As Int16 = 0
     Private Sub plLoader_RunWorkerCompleted(sender As Object, e As RunWorkerCompletedEventArgs) Handles plLoader.RunWorkerCompleted
         If lvPlaylist.Items.Count <> 0 Then
             Try
@@ -1052,7 +1046,7 @@ Public Class MainForm
 
         End If
 
-        Me.Visible = True
+        Visible = True
 
     End Sub
 
@@ -1066,4 +1060,25 @@ Public Class MainForm
     Private Sub stopButton_Click(sender As Object, e As MouseEventArgs) Handles stopButton.MouseDown
 
     End Sub
+
+    Dim mousex As Integer
+    Dim drag As Boolean
+    Private Sub lblSongInfo_MouseDown(sender As Object, e As MouseEventArgs) Handles lblSongInfo.MouseDown
+        drag = True
+        mousex = Cursor.Position.X - lblSongInfo.Left
+        tmrLabelTimer.Enabled = False
+    End Sub
+
+
+    Private Sub lblSongInfo_MouseMove(sender As Object, e As MouseEventArgs) Handles lblSongInfo.MouseMove
+        If drag Then
+            lblSongInfo.Left = Cursor.Position.X - mousex
+        End If
+    End Sub
+
+    Private Sub lblSongInfo_MouseUp(sender As Object, e As MouseEventArgs) Handles lblSongInfo.MouseUp
+        drag = False
+        tmrLabelTimer.Enabled = True
+    End Sub
+
 End Class

@@ -35,6 +35,11 @@ Partial Class MainForm
         Me.lblVolText = New System.Windows.Forms.Label()
         Me.sTimer = New System.Windows.Forms.Timer(Me.components)
         Me.myTooltip = New System.Windows.Forms.ToolTip(Me.components)
+        Me.nextButton = New System.Windows.Forms.PictureBox()
+        Me.openButton = New System.Windows.Forms.PictureBox()
+        Me.stopButton = New System.Windows.Forms.PictureBox()
+        Me.prevButton = New System.Windows.Forms.PictureBox()
+        Me.playButton = New System.Windows.Forms.PictureBox()
         Me.trkBarSeek1 = New MB.Controls.ColorSlider()
         Me.tmrLabelTimer = New System.Windows.Forms.Timer(Me.components)
         Me.pnlUtility = New System.Windows.Forms.Panel()
@@ -44,31 +49,26 @@ Partial Class MainForm
         Me.lvPlaylist = New DevComponents.DotNetBar.Controls.ListViewEx()
         Me.Title = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Time = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.cmdBW = New System.ComponentModel.BackgroundWorker()
-        Me.plLoader = New System.ComponentModel.BackgroundWorker()
-        Me.shuffleButton = New System.Windows.Forms.PictureBox()
-        Me.repeatButton = New System.Windows.Forms.PictureBox()
-        Me.nextButton = New System.Windows.Forms.PictureBox()
-        Me.openButton = New System.Windows.Forms.PictureBox()
         Me.playlistCtxMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.FileInfoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DeleteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DeleteAllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PhysicallyDeleteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.stopButton = New System.Windows.Forms.PictureBox()
-        Me.prevButton = New System.Windows.Forms.PictureBox()
-        Me.playButton = New System.Windows.Forms.PictureBox()
+        Me.cmdBW = New System.ComponentModel.BackgroundWorker()
+        Me.plLoader = New System.ComponentModel.BackgroundWorker()
+        Me.shuffleButton = New System.Windows.Forms.PictureBox()
+        Me.repeatButton = New System.Windows.Forms.PictureBox()
         Me.pnlSongInfo.SuspendLayout()
         CType(Me.trkVolumeSlider, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.VisualStyler2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.shuffleButton, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.repeatButton, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nextButton, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.openButton, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.playlistCtxMenu.SuspendLayout()
         CType(Me.stopButton, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.prevButton, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.playButton, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.playlistCtxMenu.SuspendLayout()
+        CType(Me.shuffleButton, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.repeatButton, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'pnlSongInfo
@@ -79,7 +79,7 @@ Partial Class MainForm
         Me.pnlSongInfo.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlSongInfo.Location = New System.Drawing.Point(0, 0)
         Me.pnlSongInfo.Name = "pnlSongInfo"
-        Me.pnlSongInfo.Size = New System.Drawing.Size(372, 32)
+        Me.pnlSongInfo.Size = New System.Drawing.Size(360, 32)
         Me.pnlSongInfo.TabIndex = 0
         '
         'lblPlayerState
@@ -157,6 +157,56 @@ Partial Class MainForm
         '
         Me.sTimer.Enabled = True
         '
+        'nextButton
+        '
+        Me.nextButton.Image = CType(resources.GetObject("nextButton.Image"), System.Drawing.Image)
+        Me.nextButton.Location = New System.Drawing.Point(156, 101)
+        Me.nextButton.Name = "nextButton"
+        Me.nextButton.Size = New System.Drawing.Size(43, 44)
+        Me.nextButton.TabIndex = 18
+        Me.nextButton.TabStop = False
+        Me.myTooltip.SetToolTip(Me.nextButton, "NEXT")
+        '
+        'openButton
+        '
+        Me.openButton.Image = CType(resources.GetObject("openButton.Image"), System.Drawing.Image)
+        Me.openButton.Location = New System.Drawing.Point(205, 109)
+        Me.openButton.Name = "openButton"
+        Me.openButton.Size = New System.Drawing.Size(33, 36)
+        Me.openButton.TabIndex = 17
+        Me.openButton.TabStop = False
+        Me.myTooltip.SetToolTip(Me.openButton, "OPEN")
+        '
+        'stopButton
+        '
+        Me.stopButton.Image = CType(resources.GetObject("stopButton.Image"), System.Drawing.Image)
+        Me.stopButton.Location = New System.Drawing.Point(62, 101)
+        Me.stopButton.Name = "stopButton"
+        Me.stopButton.Size = New System.Drawing.Size(40, 44)
+        Me.stopButton.TabIndex = 8
+        Me.stopButton.TabStop = False
+        Me.myTooltip.SetToolTip(Me.stopButton, "STOP")
+        '
+        'prevButton
+        '
+        Me.prevButton.Image = CType(resources.GetObject("prevButton.Image"), System.Drawing.Image)
+        Me.prevButton.Location = New System.Drawing.Point(108, 101)
+        Me.prevButton.Name = "prevButton"
+        Me.prevButton.Size = New System.Drawing.Size(42, 44)
+        Me.prevButton.TabIndex = 6
+        Me.prevButton.TabStop = False
+        Me.myTooltip.SetToolTip(Me.prevButton, "PREVIOUS")
+        '
+        'playButton
+        '
+        Me.playButton.Image = CType(resources.GetObject("playButton.Image"), System.Drawing.Image)
+        Me.playButton.Location = New System.Drawing.Point(12, 101)
+        Me.playButton.Name = "playButton"
+        Me.playButton.Size = New System.Drawing.Size(44, 44)
+        Me.playButton.TabIndex = 5
+        Me.playButton.TabStop = False
+        Me.myTooltip.SetToolTip(Me.playButton, "PLAY")
+        '
         'trkBarSeek1
         '
         Me.trkBarSeek1.BackColor = System.Drawing.Color.Transparent
@@ -208,7 +258,7 @@ Partial Class MainForm
         '
         'tmrPlaylist
         '
-        Me.tmrPlaylist.Interval = 10
+        Me.tmrPlaylist.Interval = 5
         '
         'lvPlaylist
         '
@@ -233,7 +283,7 @@ Partial Class MainForm
         Me.lvPlaylist.LabelWrap = False
         Me.lvPlaylist.Location = New System.Drawing.Point(3, 204)
         Me.lvPlaylist.Name = "lvPlaylist"
-        Me.lvPlaylist.Size = New System.Drawing.Size(367, 322)
+        Me.lvPlaylist.Size = New System.Drawing.Size(355, 350)
         Me.lvPlaylist.TabIndex = 11
         Me.lvPlaylist.UseCompatibleStateImageBehavior = False
         Me.lvPlaylist.View = System.Windows.Forms.View.Details
@@ -248,54 +298,6 @@ Partial Class MainForm
         Me.Time.Text = "Time"
         Me.Time.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.Time.Width = 80
-        '
-        'cmdBW
-        '
-        Me.cmdBW.WorkerReportsProgress = True
-        Me.cmdBW.WorkerSupportsCancellation = True
-        '
-        'plLoader
-        '
-        Me.plLoader.WorkerReportsProgress = True
-        Me.plLoader.WorkerSupportsCancellation = True
-        '
-        'shuffleButton
-        '
-        Me.shuffleButton.Image = Global.Simple_Audio_Player.My.Resources.Resources.shuffle_icon_normal
-        Me.shuffleButton.Location = New System.Drawing.Point(244, 113)
-        Me.shuffleButton.Name = "shuffleButton"
-        Me.shuffleButton.Size = New System.Drawing.Size(30, 32)
-        Me.shuffleButton.TabIndex = 24
-        Me.shuffleButton.TabStop = False
-        '
-        'repeatButton
-        '
-        Me.repeatButton.Image = Global.Simple_Audio_Player.My.Resources.Resources._1459709386_button_synchronize_sticker
-        Me.repeatButton.Location = New System.Drawing.Point(280, 113)
-        Me.repeatButton.Name = "repeatButton"
-        Me.repeatButton.Size = New System.Drawing.Size(35, 32)
-        Me.repeatButton.TabIndex = 23
-        Me.repeatButton.TabStop = False
-        '
-        'nextButton
-        '
-        Me.nextButton.Image = CType(resources.GetObject("nextButton.Image"), System.Drawing.Image)
-        Me.nextButton.Location = New System.Drawing.Point(156, 101)
-        Me.nextButton.Name = "nextButton"
-        Me.nextButton.Size = New System.Drawing.Size(43, 44)
-        Me.nextButton.TabIndex = 18
-        Me.nextButton.TabStop = False
-        Me.myTooltip.SetToolTip(Me.nextButton, "NEXT")
-        '
-        'openButton
-        '
-        Me.openButton.Image = CType(resources.GetObject("openButton.Image"), System.Drawing.Image)
-        Me.openButton.Location = New System.Drawing.Point(205, 109)
-        Me.openButton.Name = "openButton"
-        Me.openButton.Size = New System.Drawing.Size(33, 36)
-        Me.openButton.TabIndex = 17
-        Me.openButton.TabStop = False
-        Me.myTooltip.SetToolTip(Me.openButton, "OPEN")
         '
         'playlistCtxMenu
         '
@@ -334,35 +336,33 @@ Partial Class MainForm
         Me.PhysicallyDeleteToolStripMenuItem.Size = New System.Drawing.Size(175, 22)
         Me.PhysicallyDeleteToolStripMenuItem.Text = "Physically Delete"
         '
-        'stopButton
+        'cmdBW
         '
-        Me.stopButton.Image = CType(resources.GetObject("stopButton.Image"), System.Drawing.Image)
-        Me.stopButton.Location = New System.Drawing.Point(62, 101)
-        Me.stopButton.Name = "stopButton"
-        Me.stopButton.Size = New System.Drawing.Size(40, 44)
-        Me.stopButton.TabIndex = 8
-        Me.stopButton.TabStop = False
-        Me.myTooltip.SetToolTip(Me.stopButton, "STOP")
+        Me.cmdBW.WorkerReportsProgress = True
+        Me.cmdBW.WorkerSupportsCancellation = True
         '
-        'prevButton
+        'plLoader
         '
-        Me.prevButton.Image = CType(resources.GetObject("prevButton.Image"), System.Drawing.Image)
-        Me.prevButton.Location = New System.Drawing.Point(108, 101)
-        Me.prevButton.Name = "prevButton"
-        Me.prevButton.Size = New System.Drawing.Size(42, 44)
-        Me.prevButton.TabIndex = 6
-        Me.prevButton.TabStop = False
-        Me.myTooltip.SetToolTip(Me.prevButton, "PREVIOUS")
+        Me.plLoader.WorkerReportsProgress = True
+        Me.plLoader.WorkerSupportsCancellation = True
         '
-        'playButton
+        'shuffleButton
         '
-        Me.playButton.Image = CType(resources.GetObject("playButton.Image"), System.Drawing.Image)
-        Me.playButton.Location = New System.Drawing.Point(12, 101)
-        Me.playButton.Name = "playButton"
-        Me.playButton.Size = New System.Drawing.Size(44, 44)
-        Me.playButton.TabIndex = 5
-        Me.playButton.TabStop = False
-        Me.myTooltip.SetToolTip(Me.playButton, "PLAY")
+        Me.shuffleButton.Image = Global.Simple_Audio_Player.My.Resources.Resources.shuffle_icon_normal
+        Me.shuffleButton.Location = New System.Drawing.Point(244, 113)
+        Me.shuffleButton.Name = "shuffleButton"
+        Me.shuffleButton.Size = New System.Drawing.Size(30, 32)
+        Me.shuffleButton.TabIndex = 24
+        Me.shuffleButton.TabStop = False
+        '
+        'repeatButton
+        '
+        Me.repeatButton.Image = Global.Simple_Audio_Player.My.Resources.Resources._1459709386_button_synchronize_sticker
+        Me.repeatButton.Location = New System.Drawing.Point(280, 113)
+        Me.repeatButton.Name = "repeatButton"
+        Me.repeatButton.Size = New System.Drawing.Size(35, 32)
+        Me.repeatButton.TabIndex = 23
+        Me.repeatButton.TabStop = False
         '
         'MainForm
         '
@@ -370,7 +370,7 @@ Partial Class MainForm
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(372, 529)
+        Me.ClientSize = New System.Drawing.Size(360, 557)
         Me.Controls.Add(Me.shuffleButton)
         Me.Controls.Add(Me.repeatButton)
         Me.Controls.Add(Me.VArrowButton1)
@@ -395,14 +395,14 @@ Partial Class MainForm
         Me.pnlSongInfo.PerformLayout()
         CType(Me.trkVolumeSlider, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.VisualStyler2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.shuffleButton, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.repeatButton, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nextButton, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.openButton, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.playlistCtxMenu.ResumeLayout(False)
         CType(Me.stopButton, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.prevButton, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.playButton, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.playlistCtxMenu.ResumeLayout(False)
+        CType(Me.shuffleButton, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.repeatButton, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

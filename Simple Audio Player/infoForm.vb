@@ -1,10 +1,10 @@
-﻿Imports System.Text
+﻿
 
 Public Class infoForm
     Dim fileTags As Music = Nothing
-    Dim filePath As String = Nothing
+    ReadOnly filePath As String = Nothing
     Dim duration As TimeSpan
-    Dim artist, title, album, fileSize, genre, year, format As String
+    Dim artist, title, album, genre, year As String
     Dim albumart As Image
     Private Sub infoForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         fileTags = New Music(filePath)
@@ -39,12 +39,12 @@ Public Class infoForm
 
         albumart = fileTags.GetAlbumArt()
         Try
-            imgAlbumArt.Image = albumart.GetThumbnailImage(imgAlbumArt.Width, imgAlbumArt.Height, Nothing, System.IntPtr.Zero)
+            imgAlbumArt.Image = albumart.GetThumbnailImage(imgAlbumArt.Width, imgAlbumArt.Height, Nothing, IntPtr.Zero)
         Catch ex As Exception
             albumart = My.Resources.DEFAULT_ALBUM_ART
-            imgAlbumArt.Image = albumart.GetThumbnailImage(imgAlbumArt.Width, imgAlbumArt.Height, Nothing, System.IntPtr.Zero)
+            imgAlbumArt.Image = albumart.GetThumbnailImage(imgAlbumArt.Width, imgAlbumArt.Height, Nothing, IntPtr.Zero)
         End Try
-        Dim totalSize As Integer = fileInfo.Length
+        ' Dim totalSize As Integer = fileInfo.Length
         Dim mb As Double = fileInfo.Length / 1024 / 1024
 
         lblSize.Text = mb.ToString("N2") + " MB"
