@@ -80,7 +80,7 @@ Partial Class MainForm
         Me.pnlSongInfo.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlSongInfo.Location = New System.Drawing.Point(0, 0)
         Me.pnlSongInfo.Name = "pnlSongInfo"
-        Me.pnlSongInfo.Size = New System.Drawing.Size(359, 32)
+        Me.pnlSongInfo.Size = New System.Drawing.Size(360, 32)
         Me.pnlSongInfo.TabIndex = 0
         '
         'lblPlayerState
@@ -104,7 +104,7 @@ Partial Class MainForm
         Me.lblSongInfo.Name = "lblSongInfo"
         Me.lblSongInfo.Size = New System.Drawing.Size(555, 15)
         Me.lblSongInfo.TabIndex = 12
-        Me.lblSongInfo.Text = "   Rafs Simple Audio Player v1.0 (Rafsanjani Abdul Aziz Yaah Waduudu), March 2016" & _
+        Me.lblSongInfo.Text = "   Rafs Simple Audio Player v1.0 (Rafsanjani Abdul Aziz Yaah Waduudu), March 2016" &
     "    " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         '
         'trkVolumeSlider
@@ -283,9 +283,9 @@ Partial Class MainForm
         Me.lvPlaylist.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
         Me.lvPlaylist.HideSelection = False
         Me.lvPlaylist.LabelWrap = False
-        Me.lvPlaylist.Location = New System.Drawing.Point(3, 204)
+        Me.lvPlaylist.Location = New System.Drawing.Point(2, 196)
         Me.lvPlaylist.Name = "lvPlaylist"
-        Me.lvPlaylist.Size = New System.Drawing.Size(355, 311)
+        Me.lvPlaylist.Size = New System.Drawing.Size(356, 310)
         Me.lvPlaylist.TabIndex = 11
         Me.lvPlaylist.UseCompatibleStateImageBehavior = False
         Me.lvPlaylist.View = System.Windows.Forms.View.Details
@@ -375,7 +375,7 @@ Partial Class MainForm
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(359, 520)
+        Me.ClientSize = New System.Drawing.Size(360, 508)
         Me.Controls.Add(Me.shuffleButton)
         Me.Controls.Add(Me.repeatButton)
         Me.Controls.Add(Me.VArrowButton1)

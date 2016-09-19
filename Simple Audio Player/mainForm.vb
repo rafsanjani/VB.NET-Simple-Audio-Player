@@ -796,14 +796,13 @@ Public Class MainForm
         End If
     End Sub
 
-    Dim target As Integer = 230
+    Dim target As Integer = 232
     Dim targetShn As Integer = 508
 
     Private Sub tmrPlaylist_Tick(sender As Object, e As EventArgs) Handles tmrPlaylist.Tick
         If _playlistShown Then
             If Height > target Then
                 Height = Height - 20
-
             Else
                 _playlistShown = False
                 tmrPlaylist.Enabled = False
@@ -1010,16 +1009,6 @@ Public Class MainForm
 
     End Sub
 
-
-    Private Sub playButton_MouseLeave(sender As Object, e As MouseEventArgs) Handles playButton.MouseUp
-
-    End Sub
-    Private Sub PictureBox1_MouseEnter(sender As Object, e As MouseEventArgs) Handles playButton.MouseDown
-
-    End Sub
-    Private Sub stopButton_Click(sender As Object, e As MouseEventArgs) Handles stopButton.MouseDown
-
-    End Sub
 
     Dim _mousex As Integer
     Dim _drag As Boolean
