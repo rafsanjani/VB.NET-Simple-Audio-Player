@@ -1031,6 +1031,7 @@ Public Class MainForm
     End Sub
 
     Private Sub MainForm_DragEnter(sender As Object, e As DragEventArgs) Handles MyBase.DragEnter
+        'notify the control that we are ready to drop items
         e.Effect = DragDropEffects.Copy
     End Sub
 
