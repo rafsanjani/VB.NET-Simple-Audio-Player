@@ -14,7 +14,7 @@ Public Class MainForm
     '    Public WithEvents lblSlideTimer As New System.Timers.Timer
 
     Private _initPos As Integer
-
+    Private _initPlaylistItemCount As Integer
     Private _shuffle As Boolean = False
     Private _repeat As Boolean = False
     ' Private normalPlay As Boolean = True
@@ -24,16 +24,7 @@ Public Class MainForm
     ReadOnly _logouc As New Logo_UC
     ReadOnly _spectrum As New Spectrum_UC
     Dim _playingFileIndex As Integer = 0
-    '  Dim nextFileIndex As Integer = 0
-
-
-
-    'Private Sub Form1_DragDrop(sender As Object, e As DragEventArgs)
-    '    If e.Data.GetDataPresent(DataFormats.FileDrop) Then
-    '        e.Effect = DragDropEffects.Copy
-    '    End If
-    'End Sub
-
+   
 
     Private Sub nextButton_MouseDown(sender As Object, e As MouseEventArgs) Handles nextButton.MouseDown
         nextButton.Top = nextButton.Top + 3
@@ -145,7 +136,6 @@ Public Class MainForm
         'SAVE THE CURRENT FILE'S INDEX 
         _playingFileIndex = lvPlaylist.FocusedItem.Index
 
-        'MsgBox(lvPlaylist.FocusedItem.Tag)
         MusicControl.PlayMusic(lvPlaylist.Items(lvPlaylist.FocusedItem.Index).Tag.ToString)
         MusicControl.SetVolume(trkVolumeSlider.Value / 10)
     End Sub
@@ -154,14 +144,39 @@ Public Class MainForm
     'Private Sub ShowLog(ByVal msg As Object)
     '    '  rtb.Text = msg.ToString() + vbNewLine + rtb.Text + "------------------------"
     'End Sub
+    Dim _volBeforeCrossFade As Double
+    Dim _crossVol As Double
 
     Private Sub stopButton_Click_1(sender As Object, e As EventArgs) Handles stopButton.Click
         ' Dim currentVolume = CDbl(lblVolText.Text / 10)
-        MusicControl.StopMusic()
 
-        trkBarSeek1.Value = 0
+
+        'MusicControl.StopMusic()
+        'trkBarSeek1.Value = 0
+
+        CrossFade()
+    End Sub
+
+    Private Sub CrossFade()
+        _volBeforeCrossFade = CDbl(lblVolText.Text.Substring(0, lblVolText.Text.Length - 1) / 100)
+        _crossVol = _volBeforeCrossFade
+        myTimer1.Enabled = True
+    End Sub
+
+    Private Sub myTimer1_Tick(sender As Object, e As EventArgs) Handles myTimer1.Tick
+        If _crossVol > 0 Then
+            _crossVol -= 0.1
+            MusicControl.SetVolume(_crossVol)
+        Else
+            MusicControl.StopMusic()
+            MusicControl.SetVolume(_volBeforeCrossFade)
+            trkBarSeek1.Value = 0
+            myTimer1.Enabled = False
+        End If
 
     End Sub
+
+
 
     'Dim volBeforeCrossFade, crossVol As Double
     'Private Sub CrossFade()
@@ -248,28 +263,7 @@ Public Class MainForm
         End If
 
     End Sub
-    'Private Sub SetTags()
-    '    Try
-    '        Dim myMusic As Music = Nothing
-    '        Dim ts As TimeSpan = Nothing
 
-    '        For Each myItem As ListViewItem In lvPlaylist.Items
-    '            'dont do anything if file is anything other than an mp3 file
-    '            If IO.Path.GetExtension(myItem.Text) = ".mp3" Then
-    '                myMusic = New Music(myItem.Text)
-    '                myItem.Tag = myItem.Text
-    '                myItem.Text = myMusic.GetTitle()
-    '                ts = myMusic.GetDuration
-    '                myItem.SubItems.Add(ts.Minutes.ToString + ":" + ts.Seconds.ToString("D2"))
-    '            Else
-    '                Continue For
-    '            End If
-
-    '        Next
-    '    Catch ex As Exception
-    '        MsgBox(ex.Message)
-    '    End Try
-    'End Sub
     Private Sub Processfile(ByVal musicFile As String)
         If Path.GetExtension(musicFile) = ".mp3" Then
             Dim myMusic As New Music(musicFile)
@@ -315,14 +309,23 @@ Public Class MainForm
 
 
     Private Sub bw_DoWork(sender As Object, e As DoWorkEventArgs) Handles bw.DoWork
+        _initPlaylistItemCount = lvPlaylist.Items.Count
+
         Dim aFile() As String = e.Argument
+        Dim totalFiles As Integer = aFile.Length
+        Dim count As Integer
+
         For Each file In aFile
             AddToPlaylist(file)
+            count += 1
+            bw.ReportProgress(count / totalFiles * 100)
         Next
     End Sub
 
     Private Sub bw_RunWorkerCompleted(sender As Object, e As RunWorkerCompletedEventArgs) Handles bw.RunWorkerCompleted
-        If lvPlaylist.Items.Count = 1 Then
+        'If there was no item in the playlist prior to the addition of these entries, start playing the first file
+        If _initPlaylistItemCount = 0 Then
+            _playingFileIndex = 0
             MusicControl.PlayMusic(lvPlaylist.Items(0).Tag.ToString)
         End If
 
@@ -351,7 +354,11 @@ Public Class MainForm
             'COOL EXCEPTION
         End Try
 
-        lvPlaylist.EnsureVisible(_playingFileIndex)
+        Try
+            lvPlaylist.EnsureVisible(_playingFileIndex)
+        Catch ex As Exception
+        End Try
+
         Dim streamLength As Long = MusicControl.GetLength()
         trkBarSeek1.Maximum = streamLength / 100
 
@@ -390,6 +397,7 @@ Public Class MainForm
         _spectrum.Hide()
 
         MusicControl.SeekFile(0)
+        trkBarSeek1.Value = 0
         musicTimer.Enabled = False
 
         playButton.Image = My.Resources.play_icon_normal
@@ -441,8 +449,6 @@ Public Class MainForm
         'LoadPlaylist()
         plLoader.RunWorkerAsync()
 
-
-
     End Sub
 
     Private Sub LoadPlaylist()
@@ -450,7 +456,13 @@ Public Class MainForm
         Dim mitem As ListViewItem
 
         Dim doc As New XmlDocument
-        doc.Load(Application.StartupPath + "\Playlist.xml")
+        ' doc.Load(Application.StartupPath + "\Playlist.xml")
+        Try
+            doc.Load(My.Computer.FileSystem.SpecialDirectories.MyDocuments + "\Simple Audio Player\Playlist.xml")
+        Catch ex As Exception
+            My.Computer.FileSystem.CreateDirectory(My.Computer.FileSystem.SpecialDirectories.MyDocuments + "\Simple Audio Player")
+            Return
+        End Try
 
         Dim nl As XmlNodeList = doc.GetElementsByTagName("Music")
 
@@ -481,45 +493,17 @@ Public Class MainForm
         My.Settings.PlayerState = MusicControl.GetState.ToString()
 
         SavePlaylist()
-
-        'SAVE PLAYLIST TO SQLITE DB FILE IF NOT EMPTY
-        'DEPRECATED
-        'XML BASED SAVING MORE FASTER
-        'If lvPlaylist.Items.Count <> 0 Then
-
-        '    Dim con As New SQLiteConnection(My.Settings.playlistDBConnectionString)
-        '    Dim cmd As New SQLiteCommand
-        '    Dim query As String
-        '
-        '    Try
-        '        con.Open()
-        '        For Each item As ListViewItem In lvPlaylist.Items
-
-        '            query = "INSERT INTO myPlaylist VALUES (@path, @title, @duration)"
-        '            With cmd
-        '                .CommandText = query
-        '                .Parameters.AddWithValue("@path", item.Text)
-        '                .Parameters.AddWithValue("@title", item.Tag.ToString)
-        '                .Parameters.AddWithValue("@duration", item.SubItems(1).Text)
-        '                .Connection = con
-        '            End With
-        '            cmd.Connection = con
-        '            cmd.CommandText = query
-        '
-        '            cmd.ExecuteNonQuery()
-        '
-        '        Next
-        '        con.Close()
-        '    catch ex As Exception
-        '        MsgBox(ex.Message)
-        '    End Try
-        '
-        'End If
-
+ 
     End Sub
 
     Private Sub SavePlaylist()
-        Dim writer As New XmlTextWriter(Application.StartupPath + "\Playlist.xml", Encoding.UTF8)
+        'Dim writer As New XmlTextWriter(Application.StartupPath + "\Playlist.xml", Encoding.UTF8)
+        Dim writer As XmlTextWriter
+        Try
+            writer = New XmlTextWriter(My.Computer.FileSystem.SpecialDirectories.MyDocuments + "\Simple Audio Player\Playlist.xml", Encoding.UTF8)
+        Catch ex As Exception
+            Return
+        End Try
         writer.WriteStartDocument(True)
         writer.Formatting = Formatting.Indented
         writer.Indentation = 2
@@ -537,7 +521,7 @@ Public Class MainForm
 
 
 
-    Private Sub createNode(songTitle As String, songFilePath As String, Duration As String, writer As XmlTextWriter)
+    Private Sub createNode(songTitle As String, songFilePath As String, duration As String, writer As XmlTextWriter)
         writer.WriteStartElement("Music")
         writer.WriteStartElement("Title")
         writer.WriteString(songTitle)
@@ -664,22 +648,7 @@ Public Class MainForm
 
     End Sub
 
-    'Private Sub PrevTrack()
-    '    'REVERSE OF NextTrack() FUNCTION
-    '    SetPrevItemColors()
-
-    '    If playingFileIndex - 1 = 0 Then
-    '        playingFileIndex = lvPlaylist.Items.Count - 1
-    '    Else
-    '        playingFileIndex -= 1
-    '    End If
-
-    '    MusicControl.PlayMusic(lvPlaylist.Items(playingFileIndex).Tag.ToString)
-
-    '    SetCurrentItemColors()
-    '    lvPlaylist.EnsureVisible(playingFileIndex)
-    '    MusicControl.SetVolume(trkVolumeSlider.Value / 10)
-    'End Sub
+    
     Private Sub SetPrevItemColors()
         If lvPlaylist.Items.Count <> 0 Then
             lvPlaylist.Items(_playingFileIndex).BackColor = Color.Transparent
@@ -759,12 +728,10 @@ Public Class MainForm
 
         Do
             ranNum = rnd.Next(0, plstCount)
-            '  ShowLog("doing")
         Loop While IsPlayed(ranNum)
 
         If _playedItems.Count - 1 = lvPlaylist.Items.Count Then
             _playedItems.Clear()
-            ' ShowLog("clearing list")
         Else
 
         End If
@@ -819,7 +786,7 @@ Public Class MainForm
     End Sub
 
 
-    Dim playlistShown As Boolean = True
+    Dim _playlistShown As Boolean = True
     Private Sub VArrowButton1_Click(sender As Object, e As EventArgs) Handles VArrowButton1.Click
         tmrPlaylist.Enabled = True
         If VArrowButton1.ArrowDirection = ArrowDirection.Down Then
@@ -833,19 +800,17 @@ Public Class MainForm
     Dim targetShn As Integer = 508
 
     Private Sub tmrPlaylist_Tick(sender As Object, e As EventArgs) Handles tmrPlaylist.Tick
-
-        '  ShowLog(target.ToString + " " + Me.Height.ToString)
-        If playlistShown Then
+        If _playlistShown Then
             If Height > target Then
                 Height = Height - 20
 
             Else
-                playlistShown = False
+                _playlistShown = False
                 tmrPlaylist.Enabled = False
                 Try
                     lvPlaylist.EnsureVisible(_playingFileIndex)
                 Catch ex As Exception
-                    '    'no item is playing or no item is in the list
+                    'no item is playing or no item is in the list: DO NOTHING
                 End Try
 
             End If
@@ -856,13 +821,13 @@ Public Class MainForm
 
             Else
 
-                playlistShown = True
+                _playlistShown = True
 
                 tmrPlaylist.Enabled = False
                 Try
                     lvPlaylist.EnsureVisible(_playingFileIndex)
                 Catch ex As Exception
-                    '    'no item is playing or no item is in the list
+                    'no item is playing or no item is in the list
                 End Try
             End If
         End If
@@ -948,8 +913,6 @@ Public Class MainForm
         shuffleButton.Top = shuffleButton.Top - 2
     End Sub
 
-
-
     Private Sub DeleteAllToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeleteAllToolStripMenuItem.Click
         lvPlaylist.Items.Clear()
         MusicControl.StopMusic()
@@ -1027,7 +990,6 @@ Public Class MainForm
         LoadPlaylist()
     End Sub
 
-    ' Dim x As Int16 = 0
     Private Sub plLoader_RunWorkerCompleted(sender As Object, e As RunWorkerCompletedEventArgs) Handles plLoader.RunWorkerCompleted
         If lvPlaylist.Items.Count <> 0 Then
             Try
@@ -1035,8 +997,6 @@ Public Class MainForm
                     Case "Playing"
                         _playingFileIndex = My.Settings.LastFileIndex
                         MusicControl.PlayMusic(lvPlaylist.Items(_playingFileIndex).Tag)
-
-                        ' SetCurrentItemColors()
 
                         MusicControl.SeekFile(My.Settings.PlayingPosition)
                 End Select
@@ -1061,24 +1021,38 @@ Public Class MainForm
 
     End Sub
 
-    Dim mousex As Integer
-    Dim drag As Boolean
+    Dim _mousex As Integer
+    Dim _drag As Boolean
     Private Sub lblSongInfo_MouseDown(sender As Object, e As MouseEventArgs) Handles lblSongInfo.MouseDown
-        drag = True
-        mousex = Cursor.Position.X - lblSongInfo.Left
+        _drag = True
+        _mousex = Cursor.Position.X - lblSongInfo.Left
         tmrLabelTimer.Enabled = False
     End Sub
 
 
     Private Sub lblSongInfo_MouseMove(sender As Object, e As MouseEventArgs) Handles lblSongInfo.MouseMove
-        If drag Then
-            lblSongInfo.Left = Cursor.Position.X - mousex
+        If _drag Then
+            lblSongInfo.Left = Cursor.Position.X - _mousex
         End If
     End Sub
 
     Private Sub lblSongInfo_MouseUp(sender As Object, e As MouseEventArgs) Handles lblSongInfo.MouseUp
-        drag = False
+        _drag = False
         tmrLabelTimer.Enabled = True
     End Sub
 
+    Private Sub MainForm_DragEnter(sender As Object, e As DragEventArgs) Handles MyBase.DragEnter
+        e.Effect = DragDropEffects.Copy
+    End Sub
+
+    Private Sub MainForm_DragDrop(sender As Object, e As DragEventArgs) Handles MyBase.DragDrop
+        lvPlaylist.Items.Clear()
+        MusicControl.StopMusic()
+
+        _files = e.Data.GetData(DataFormats.FileDrop)
+        bw.RunWorkerAsync(_files)
+    End Sub
+
+   
 End Class
+'RAFS

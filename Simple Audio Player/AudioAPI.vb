@@ -5,9 +5,9 @@ Imports System.Runtime.InteropServices
 
 <BrowsableAttribute(True), ComVisible(True), DescriptionAttribute("Simplified Class for using CoreAudioAPI.dll.")> _
 Public NotInheritable Class AudioAPI
-    Friend deviceCapture As MMDevice
-    Friend deviceRender As MMDevice
-    Friend DevEnum As New MMDeviceEnumerator()
+    Private ReadOnly deviceCapture As MMDevice
+    Private ReadOnly deviceRender As MMDevice
+    Private ReadOnly DevEnum As New MMDeviceEnumerator()
     Public Sub New()
         deviceCapture = DevEnum.GetDefaultAudioEndpoint(EDataFlow.eCapture, ERole.eMultimedia)
         deviceRender = DevEnum.GetDefaultAudioEndpoint(EDataFlow.eRender, ERole.eMultimedia)

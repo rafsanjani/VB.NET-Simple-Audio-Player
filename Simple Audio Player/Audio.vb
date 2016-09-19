@@ -1,6 +1,4 @@
-﻿
-
-Public Class Audio
+﻿Public Class Audio
     Implements IDisposable
 
     Dim stream As IntPtr = Nothing
@@ -12,7 +10,7 @@ Public Class Audio
     Private Const BASS_POS_BYTE As UInteger = 0
     Private Const BASS_DEVICE_DEFAULT As UInteger = 2
     Private Const BASS_ATTRIB_VOL As UInteger = 2
-    Private fileLoaded As Boolean
+    'Private fileLoaded As Boolean
 
     Private length As Long
 
@@ -40,36 +38,34 @@ Public Class Audio
     Private Declare Function BASS_ChannelIsActive Lib "bass.dll" (ByVal handle As IntPtr) As UInteger
     Private Declare Function BASS_ChannelPlay Lib "bass.dll" (ByVal handle As IntPtr, ByVal restart As Boolean) As Boolean
     Private Declare Function BASS_ChannelPause Lib "bass.dll" (ByVal handle As IntPtr) As Boolean
-    Private Declare Function BASS_ChannelSetDevice Lib "bass.dll" (ByVal handle As IntPtr, ByVal device As IntPtr) As Boolean
-    Private Declare Function BASS_ChannelGetDevice Lib "bass.dll" (ByVal handle As IntPtr) As Integer
+    '   Private Declare Function BASS_ChannelSetDevice Lib "bass.dll" (ByVal handle As IntPtr, ByVal device As IntPtr) As Boolean
+    ' Private Declare Function BASS_ChannelGetDevice Lib "bass.dll" (ByVal handle As IntPtr) As Integer
     Private Declare Function BASS_ChannelSetAttribute Lib "bass.dll" (ByVal handle As IntPtr, ByVal attrib As IntPtr, ByVal value As Single) As Boolean
-    Private Declare Function BASS_SetVolume Lib "bass.dll" (ByVal volume As Single) As Boolean
+    'Private Declare Function BASS_SetVolume Lib "bass.dll" (ByVal volume As Single) As Boolean
     Private Declare Function BASS_StreamCreateFile Lib "bass.dll" Alias "BASS_StreamCreateFile" (ByVal mem As Boolean, ByVal file As String, ByVal offset As UInteger, ByVal offsethigh As UInteger, ByVal length As UInteger, ByVal lengthhigh As UInteger, ByVal flags As UInteger) As IntPtr
-    Private Declare Function BASS_SampleLoad Lib "bass.dll" Alias "BASS_SampleLoad" (ByVal mem As Boolean, ByVal file As String, ByVal offset As UInteger, ByVal offsethigh As UInteger, ByVal length As UInteger, ByVal max As UInteger, ByVal flags As UInteger) As IntPtr
-    Private Declare Function BASS_SampleFree Lib "bass.dll" (ByVal handle As IntPtr) As Boolean
-    Private Declare Function BASS_SampleGetChannel Lib "bass.dll" (ByVal handle As IntPtr, ByVal onlynew As Boolean) As IntPtr
-    Private Declare Function BASS_SampleStop Lib "bass.dll" (ByVal handle As IntPtr) As Boolean
-    Private Declare Function BASS_ChannelGetAttribute Lib "bass.dll" (handle As IntPtr, attrib As IntPtr, ByRef output As Double) As Double
-    Private Declare Function BASS_GetVolume Lib "bass.dll" () As Double
+    'Private Declare Function BASS_SampleLoad Lib "bass.dll" Alias "BASS_SampleLoad" (ByVal mem As Boolean, ByVal file As String, ByVal offset As UInteger, ByVal offsethigh As UInteger, ByVal length As UInteger, ByVal max As UInteger, ByVal flags As UInteger) As IntPtr
+    'Private Declare Function BASS_SampleFree Lib "bass.dll" (ByVal handle As IntPtr) As Boolean
+    'Private Declare Function BASS_SampleGetChannel Lib "bass.dll" (ByVal handle As IntPtr, ByVal onlynew As Boolean) As IntPtr
+    'Private Declare Function BASS_SampleStop Lib "bass.dll" (ByVal handle As IntPtr) As Boolean
+    'Private Declare Function BASS_ChannelGetAttribute Lib "bass.dll" (handle As IntPtr, attrib As IntPtr, ByRef output As Double) As Double
+    'Private Declare Function BASS_GetVolume Lib "bass.dll" () As Double
 
     Public Sub New(Optional ByVal fileName As String = "")
         BASS_Init(-1, 44100, BASS_DEVICE_DEFAULT, IntPtr.Zero, Nothing)
         Me.fileName = fileName
     End Sub
 
-    Private Sub SetDevice()
-        BASS_ChannelSetDevice(stream, 1)
-    End Sub
-
-    
+    'Private Sub SetDevice()
+    '    BASS_ChannelSetDevice(stream, 1)
+    'End Sub
 
 
-    Public Function PlayMusic(fileName As String) As Boolean
-        Me.fileName = fileName
+    Public Function PlayMusic(musicFileName As String) As Boolean
+        fileName = musicFileName
         stream = BASS_StreamCreateFile(False, fileName, 0, 0, 0, 0, 0)
 
         If BASS_ChannelPlay(stream, False) Then
-            fileLoaded = True
+            'fileLoaded = True
             RaiseEvent MediaPlaying()
             Return True
         End If
@@ -149,7 +145,7 @@ Public Class Audio
         BASS_ChannelStop(stream)
         BASS_StreamFree(stream)
 
-        fileLoaded = False
+        ' fileLoaded = False
         RaiseEvent MediaStopped()
     End Sub
 
@@ -173,7 +169,7 @@ Public Class Audio
         Return PlayerStates.Stopped
     End Function
 
-    Public Sub Dispose() Implements System.IDisposable.Dispose
+    Public Sub Dispose() Implements IDisposable.Dispose
         StopMusic()
         BASS_Free()
     End Sub

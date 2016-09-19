@@ -2,7 +2,7 @@
 Imports System.IO
 
 Public Class Music
-    Private myFilePath As String
+    Private ReadOnly myFilePath As String
     Private mySongTitle As String
     Private duration As TimeSpan
     Private myAlbumTitle, genre, artist As String
@@ -48,7 +48,7 @@ Public Class Music
             Dim pic As IPicture = mp3.Tag.Pictures(0)
             Dim ms As New MemoryStream(pic.Data.Data)
             If Not ms Is Nothing And ms.Length > 4096 Then
-                albumart = System.Drawing.Image.FromStream(ms)
+                albumart = Drawing.Image.FromStream(ms)
                 ms.Close()
             End If
         End If
@@ -115,7 +115,7 @@ Public Class Music
     Public Function GetTitle() As String
 
         If mySongTitle = Nothing Then
-            Return IO.Path.GetFileNameWithoutExtension(myFilePath)
+            Return Path.GetFileNameWithoutExtension(myFilePath)
         End If
 
         Return mySongTitle

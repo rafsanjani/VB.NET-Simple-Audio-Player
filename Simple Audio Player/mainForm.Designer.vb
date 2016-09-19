@@ -58,6 +58,7 @@ Partial Class MainForm
         Me.plLoader = New System.ComponentModel.BackgroundWorker()
         Me.shuffleButton = New System.Windows.Forms.PictureBox()
         Me.repeatButton = New System.Windows.Forms.PictureBox()
+        Me.myTimer1 = New System.Windows.Forms.Timer(Me.components)
         Me.pnlSongInfo.SuspendLayout()
         CType(Me.trkVolumeSlider, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.VisualStyler2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -79,14 +80,14 @@ Partial Class MainForm
         Me.pnlSongInfo.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlSongInfo.Location = New System.Drawing.Point(0, 0)
         Me.pnlSongInfo.Name = "pnlSongInfo"
-        Me.pnlSongInfo.Size = New System.Drawing.Size(360, 32)
+        Me.pnlSongInfo.Size = New System.Drawing.Size(359, 32)
         Me.pnlSongInfo.TabIndex = 0
         '
         'lblPlayerState
         '
         Me.lblPlayerState.AutoSize = True
         Me.lblPlayerState.Font = New System.Drawing.Font("Cooper Black", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPlayerState.ForeColor = System.Drawing.Color.Black
+        Me.lblPlayerState.ForeColor = System.Drawing.Color.CornflowerBlue
         Me.lblPlayerState.Location = New System.Drawing.Point(0, 10)
         Me.lblPlayerState.Name = "lblPlayerState"
         Me.lblPlayerState.Size = New System.Drawing.Size(52, 14)
@@ -246,6 +247,7 @@ Partial Class MainForm
         '
         Me.VArrowButton1.AllowAnimations = True
         Me.VArrowButton1.ArrowDirection = System.Windows.Forms.ArrowDirection.Up
+        Me.VArrowButton1.Enabled = True
         Me.VArrowButton1.Location = New System.Drawing.Point(330, 177)
         Me.VArrowButton1.Maximum = 100
         Me.VArrowButton1.Minimum = 0
@@ -283,7 +285,7 @@ Partial Class MainForm
         Me.lvPlaylist.LabelWrap = False
         Me.lvPlaylist.Location = New System.Drawing.Point(3, 204)
         Me.lvPlaylist.Name = "lvPlaylist"
-        Me.lvPlaylist.Size = New System.Drawing.Size(355, 350)
+        Me.lvPlaylist.Size = New System.Drawing.Size(355, 311)
         Me.lvPlaylist.TabIndex = 11
         Me.lvPlaylist.UseCompatibleStateImageBehavior = False
         Me.lvPlaylist.View = System.Windows.Forms.View.Details
@@ -364,13 +366,16 @@ Partial Class MainForm
         Me.repeatButton.TabIndex = 23
         Me.repeatButton.TabStop = False
         '
+        'myTimer1
+        '
+        '
         'MainForm
         '
         Me.AllowDrop = True
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(360, 557)
+        Me.ClientSize = New System.Drawing.Size(359, 520)
         Me.Controls.Add(Me.shuffleButton)
         Me.Controls.Add(Me.repeatButton)
         Me.Controls.Add(Me.VArrowButton1)
@@ -427,7 +432,6 @@ Partial Class MainForm
     Friend WithEvents tmrLabelTimer As System.Windows.Forms.Timer
     Friend WithEvents pnlUtility As System.Windows.Forms.Panel
     Friend WithEvents dlgOpenFile As System.Windows.Forms.OpenFileDialog
-    Friend WithEvents VArrowButton1 As VIBlend.WinForms.Controls.vArrowButton
     Friend WithEvents tmrPlaylist As System.Windows.Forms.Timer
     Friend WithEvents shuffleButton As System.Windows.Forms.PictureBox
     Friend WithEvents repeatButton As System.Windows.Forms.PictureBox
@@ -441,5 +445,6 @@ Partial Class MainForm
     Friend WithEvents PhysicallyDeleteToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents cmdBW As System.ComponentModel.BackgroundWorker
     Friend WithEvents plLoader As System.ComponentModel.BackgroundWorker
-
+    Friend WithEvents myTimer1 As System.Windows.Forms.Timer
+    Private WithEvents VArrowButton1 As VIBlend.WinForms.Controls.vArrowButton
 End Class

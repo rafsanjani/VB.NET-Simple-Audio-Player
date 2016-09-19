@@ -48,18 +48,20 @@ Partial Class infoForm
         Me.pnlAlbumArt = New System.Windows.Forms.Panel()
         Me.imgAlbumArt = New System.Windows.Forms.PictureBox()
         Me.btnClose = New System.Windows.Forms.Button()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.pnlAlbumArt.SuspendLayout()
         CType(Me.imgAlbumArt, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Panel1
         '
         Me.Panel1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel1.BackColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Location = New System.Drawing.Point(2, 0)
         Me.Panel1.Name = "Panel1"
@@ -69,22 +71,24 @@ Partial Class infoForm
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Modern No. 20", 27.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(117, 9)
+        Me.Label1.Font = New System.Drawing.Font("Palatino Linotype", 30.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.Color.Coral
+        Me.Label1.Location = New System.Drawing.Point(82, 1)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(395, 38)
+        Me.Label1.Size = New System.Drawing.Size(467, 55)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "SONG INFORMATION"
         '
         'txtFileName
         '
-        Me.txtFileName.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFileName.ForeColor = System.Drawing.Color.WhiteSmoke
+        Me.txtFileName.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.txtFileName.Font = New System.Drawing.Font("Sitka Banner", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFileName.ForeColor = System.Drawing.Color.White
         Me.txtFileName.Location = New System.Drawing.Point(12, 59)
         Me.txtFileName.Name = "txtFileName"
         Me.txtFileName.ReadOnly = True
-        Me.txtFileName.Size = New System.Drawing.Size(579, 29)
-        Me.txtFileName.TabIndex = 1
+        Me.txtFileName.Size = New System.Drawing.Size(579, 26)
+        Me.txtFileName.TabIndex = 10
         '
         'GroupBox1
         '
@@ -107,11 +111,11 @@ Partial Class infoForm
         'lblYear
         '
         Me.lblYear.AutoSize = True
-        Me.lblYear.Font = New System.Drawing.Font("Adobe Hebrew", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblYear.ForeColor = System.Drawing.Color.Black
-        Me.lblYear.Location = New System.Drawing.Point(116, 120)
+        Me.lblYear.Font = New System.Drawing.Font("Georgia", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblYear.ForeColor = System.Drawing.Color.Bisque
+        Me.lblYear.Location = New System.Drawing.Point(116, 125)
         Me.lblYear.Name = "lblYear"
-        Me.lblYear.Size = New System.Drawing.Size(44, 24)
+        Me.lblYear.Size = New System.Drawing.Size(41, 18)
         Me.lblYear.TabIndex = 9
         Me.lblYear.Text = "Title"
         '
@@ -119,7 +123,7 @@ Partial Class infoForm
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Palatino Linotype", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.ForeColor = System.Drawing.Color.Black
+        Me.Label10.ForeColor = System.Drawing.Color.White
         Me.Label10.Location = New System.Drawing.Point(13, 120)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(51, 26)
@@ -129,44 +133,44 @@ Partial Class infoForm
         'lblArtist
         '
         Me.lblArtist.AutoSize = True
-        Me.lblArtist.Font = New System.Drawing.Font("Adobe Hebrew", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblArtist.ForeColor = System.Drawing.Color.Black
-        Me.lblArtist.Location = New System.Drawing.Point(116, 42)
+        Me.lblArtist.Font = New System.Drawing.Font("Georgia", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblArtist.ForeColor = System.Drawing.Color.Bisque
+        Me.lblArtist.Location = New System.Drawing.Point(116, 47)
         Me.lblArtist.Name = "lblArtist"
-        Me.lblArtist.Size = New System.Drawing.Size(44, 24)
+        Me.lblArtist.Size = New System.Drawing.Size(41, 18)
         Me.lblArtist.TabIndex = 7
         Me.lblArtist.Text = "Title"
         '
         'lblAlbum
         '
         Me.lblAlbum.AutoSize = True
-        Me.lblAlbum.Font = New System.Drawing.Font("Adobe Hebrew", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblAlbum.ForeColor = System.Drawing.Color.Black
-        Me.lblAlbum.Location = New System.Drawing.Point(116, 68)
+        Me.lblAlbum.Font = New System.Drawing.Font("Georgia", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblAlbum.ForeColor = System.Drawing.Color.Bisque
+        Me.lblAlbum.Location = New System.Drawing.Point(116, 76)
         Me.lblAlbum.Name = "lblAlbum"
-        Me.lblAlbum.Size = New System.Drawing.Size(44, 24)
+        Me.lblAlbum.Size = New System.Drawing.Size(41, 18)
         Me.lblAlbum.TabIndex = 6
         Me.lblAlbum.Text = "Title"
         '
         'lblGenre
         '
         Me.lblGenre.AutoSize = True
-        Me.lblGenre.Font = New System.Drawing.Font("Adobe Hebrew", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblGenre.ForeColor = System.Drawing.Color.Black
-        Me.lblGenre.Location = New System.Drawing.Point(116, 94)
+        Me.lblGenre.Font = New System.Drawing.Font("Georgia", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblGenre.ForeColor = System.Drawing.Color.Bisque
+        Me.lblGenre.Location = New System.Drawing.Point(116, 99)
         Me.lblGenre.Name = "lblGenre"
-        Me.lblGenre.Size = New System.Drawing.Size(44, 24)
+        Me.lblGenre.Size = New System.Drawing.Size(41, 18)
         Me.lblGenre.TabIndex = 5
         Me.lblGenre.Text = "Title"
         '
         'lblTitle
         '
         Me.lblTitle.AutoSize = True
-        Me.lblTitle.Font = New System.Drawing.Font("Adobe Hebrew", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTitle.ForeColor = System.Drawing.Color.Black
-        Me.lblTitle.Location = New System.Drawing.Point(116, 16)
+        Me.lblTitle.Font = New System.Drawing.Font("Georgia", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTitle.ForeColor = System.Drawing.Color.Bisque
+        Me.lblTitle.Location = New System.Drawing.Point(116, 21)
         Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(44, 24)
+        Me.lblTitle.Size = New System.Drawing.Size(41, 18)
         Me.lblTitle.TabIndex = 4
         Me.lblTitle.Text = "Title"
         '
@@ -174,7 +178,7 @@ Partial Class infoForm
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Palatino Linotype", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.ForeColor = System.Drawing.Color.Black
+        Me.Label5.ForeColor = System.Drawing.Color.White
         Me.Label5.Location = New System.Drawing.Point(13, 42)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(63, 26)
@@ -185,7 +189,7 @@ Partial Class infoForm
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Palatino Linotype", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.ForeColor = System.Drawing.Color.Black
+        Me.Label4.ForeColor = System.Drawing.Color.White
         Me.Label4.Location = New System.Drawing.Point(13, 68)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(75, 26)
@@ -196,7 +200,7 @@ Partial Class infoForm
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Palatino Linotype", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.ForeColor = System.Drawing.Color.Black
+        Me.Label3.ForeColor = System.Drawing.Color.White
         Me.Label3.Location = New System.Drawing.Point(13, 94)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(68, 26)
@@ -207,7 +211,7 @@ Partial Class infoForm
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Palatino Linotype", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.Color.Black
+        Me.Label2.ForeColor = System.Drawing.Color.White
         Me.Label2.Location = New System.Drawing.Point(13, 16)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(54, 26)
@@ -233,22 +237,22 @@ Partial Class infoForm
         'lblDuration
         '
         Me.lblDuration.AutoSize = True
-        Me.lblDuration.Font = New System.Drawing.Font("Adobe Hebrew", 14.25!)
-        Me.lblDuration.ForeColor = System.Drawing.Color.Black
-        Me.lblDuration.Location = New System.Drawing.Point(116, 42)
+        Me.lblDuration.Font = New System.Drawing.Font("Georgia", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDuration.ForeColor = System.Drawing.Color.Bisque
+        Me.lblDuration.Location = New System.Drawing.Point(116, 47)
         Me.lblDuration.Name = "lblDuration"
-        Me.lblDuration.Size = New System.Drawing.Size(44, 24)
+        Me.lblDuration.Size = New System.Drawing.Size(41, 18)
         Me.lblDuration.TabIndex = 11
         Me.lblDuration.Text = "Title"
         '
         'lblQuality
         '
         Me.lblQuality.AutoSize = True
-        Me.lblQuality.Font = New System.Drawing.Font("Adobe Hebrew", 14.25!)
-        Me.lblQuality.ForeColor = System.Drawing.Color.Black
-        Me.lblQuality.Location = New System.Drawing.Point(116, 68)
+        Me.lblQuality.Font = New System.Drawing.Font("Georgia", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblQuality.ForeColor = System.Drawing.Color.Bisque
+        Me.lblQuality.Location = New System.Drawing.Point(116, 76)
         Me.lblQuality.Name = "lblQuality"
-        Me.lblQuality.Size = New System.Drawing.Size(44, 24)
+        Me.lblQuality.Size = New System.Drawing.Size(41, 18)
         Me.lblQuality.TabIndex = 10
         Me.lblQuality.Text = "Title"
         '
@@ -256,7 +260,7 @@ Partial Class infoForm
         '
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Palatino Linotype", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.ForeColor = System.Drawing.Color.Black
+        Me.Label9.ForeColor = System.Drawing.Color.White
         Me.Label9.Location = New System.Drawing.Point(13, 42)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(94, 26)
@@ -266,11 +270,11 @@ Partial Class infoForm
         'lblSize
         '
         Me.lblSize.AutoSize = True
-        Me.lblSize.Font = New System.Drawing.Font("Adobe Hebrew", 14.25!)
-        Me.lblSize.ForeColor = System.Drawing.Color.Black
-        Me.lblSize.Location = New System.Drawing.Point(116, 94)
+        Me.lblSize.Font = New System.Drawing.Font("Georgia", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSize.ForeColor = System.Drawing.Color.Bisque
+        Me.lblSize.Location = New System.Drawing.Point(116, 99)
         Me.lblSize.Name = "lblSize"
-        Me.lblSize.Size = New System.Drawing.Size(44, 24)
+        Me.lblSize.Size = New System.Drawing.Size(41, 18)
         Me.lblSize.TabIndex = 9
         Me.lblSize.Text = "Title"
         '
@@ -278,7 +282,7 @@ Partial Class infoForm
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Palatino Linotype", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.ForeColor = System.Drawing.Color.Black
+        Me.Label8.ForeColor = System.Drawing.Color.White
         Me.Label8.Location = New System.Drawing.Point(13, 68)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(80, 26)
@@ -288,11 +292,11 @@ Partial Class infoForm
         'lblFormat
         '
         Me.lblFormat.AutoSize = True
-        Me.lblFormat.Font = New System.Drawing.Font("Adobe Hebrew", 14.25!)
-        Me.lblFormat.ForeColor = System.Drawing.Color.Black
-        Me.lblFormat.Location = New System.Drawing.Point(116, 16)
+        Me.lblFormat.Font = New System.Drawing.Font("Georgia", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblFormat.ForeColor = System.Drawing.Color.Bisque
+        Me.lblFormat.Location = New System.Drawing.Point(116, 21)
         Me.lblFormat.Name = "lblFormat"
-        Me.lblFormat.Size = New System.Drawing.Size(44, 24)
+        Me.lblFormat.Size = New System.Drawing.Size(41, 18)
         Me.lblFormat.TabIndex = 8
         Me.lblFormat.Text = "Title"
         '
@@ -300,7 +304,7 @@ Partial Class infoForm
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Palatino Linotype", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.ForeColor = System.Drawing.Color.Black
+        Me.Label7.ForeColor = System.Drawing.Color.White
         Me.Label7.Location = New System.Drawing.Point(13, 94)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(50, 26)
@@ -311,7 +315,7 @@ Partial Class infoForm
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Palatino Linotype", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.ForeColor = System.Drawing.Color.Black
+        Me.Label6.ForeColor = System.Drawing.Color.White
         Me.Label6.Location = New System.Drawing.Point(13, 16)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(77, 26)
@@ -342,15 +346,26 @@ Partial Class infoForm
         Me.btnClose.Location = New System.Drawing.Point(12, 403)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(75, 34)
-        Me.btnClose.TabIndex = 5
+        Me.btnClose.TabIndex = 1
         Me.btnClose.Text = "CLOSE"
         Me.btnClose.UseVisualStyleBackColor = True
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = Global.Simple_Audio_Player.My.Resources.Resources.Untitled_1
+        Me.PictureBox1.Location = New System.Drawing.Point(161, 394)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(234, 43)
+        Me.PictureBox1.TabIndex = 6
+        Me.PictureBox1.TabStop = False
         '
         'infoForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(603, 446)
+        Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.pnlAlbumArt)
         Me.Controls.Add(Me.GroupBox2)
@@ -358,6 +373,7 @@ Partial Class infoForm
         Me.Controls.Add(Me.txtFileName)
         Me.Controls.Add(Me.Panel1)
         Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "infoForm"
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
@@ -371,6 +387,7 @@ Partial Class infoForm
         Me.GroupBox2.PerformLayout()
         Me.pnlAlbumArt.ResumeLayout(False)
         CType(Me.imgAlbumArt, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -401,4 +418,5 @@ Partial Class infoForm
     Friend WithEvents imgAlbumArt As System.Windows.Forms.PictureBox
     Friend WithEvents lblYear As System.Windows.Forms.Label
     Friend WithEvents Label10 As System.Windows.Forms.Label
+    Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
 End Class

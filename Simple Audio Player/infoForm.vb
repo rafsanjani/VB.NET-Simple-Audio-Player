@@ -48,6 +48,7 @@ Public Class infoForm
         Dim mb As Double = fileInfo.Length / 1024 / 1024
 
         lblSize.Text = mb.ToString("N2") + " MB"
+
     End Sub
 
     Public Sub New(ByVal filePath As String)

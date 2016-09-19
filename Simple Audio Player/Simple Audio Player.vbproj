@@ -59,7 +59,9 @@
     <Reference Include="CoreAudioApi">
       <HintPath>C:\Users\RAFS\Documents\EGDownloads\Compressed\VUMeter-by-bEGI\VU Meter\EXTERNAL RESOURCES\COREAUDIOAPI.DLL\.NET 4 DLL [x86]\CoreAudioApi.dll</HintPath>
     </Reference>
-    <Reference Include="DevComponents.DotNetBar2, Version=12.0.0.1, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04" />
+    <Reference Include="DevComponents.DotNetBar2, Version=12.0.0.1, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="SkinSoft.VisualStyler, Version=2.4.0.0, Culture=neutral, PublicKeyToken=0fda9f423e1d9830, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
