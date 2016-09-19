@@ -1046,6 +1046,7 @@ Public Class MainForm
     End Sub
 
     Private Sub MainForm_DragDrop(sender As Object, e As DragEventArgs) Handles MyBase.DragDrop
+        'Clear the playlist when an item is dropped onto the media player
         lvPlaylist.Items.Clear()
         MusicControl.StopMusic()
 
