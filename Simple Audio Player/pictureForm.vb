@@ -1,6 +1,6 @@
-﻿Public Class pictureForm
-    Dim img As System.Drawing.Image = Nothing
-    Public Sub New(ByVal img As System.Drawing.Image)
+﻿Public Class PictureForm
+    Dim img As Image = Nothing
+    Public Sub New(ByVal img As Image)
         Me.img = img
         ' This call is required by the designer.
         InitializeComponent()

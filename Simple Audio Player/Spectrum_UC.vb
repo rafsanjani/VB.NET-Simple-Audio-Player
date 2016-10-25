@@ -3,8 +3,6 @@
 Public Class Spectrum_UC
     Shared _AUDIOAPI As New AudioAPI
 
-
-
     Private Sub Spectrum_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         With lSpectrum
             .DrawBorder = False
@@ -35,6 +33,6 @@ Public Class Spectrum_UC
         lSpectrum.Value = _AUDIOAPI.GetPeakValue(AudioAPI.AudioChannels.GET_OUT_LeftPeak)
         rSpectrum.Value = _AUDIOAPI.GetPeakValue(AudioAPI.AudioChannels.GET_OUT_RightPeak)
     End Sub
-    
-     
+
+
 End Class

@@ -1,4 +1,4 @@
-3/31/2016 create playlist - DONE
+c           3/31/2016 create playlist - DONE
 4/01/2016 create spectrum display - DONE
 4/02/2016 Open File button - DONE
 4/05/2016 DEVELOPMENT PAUSED

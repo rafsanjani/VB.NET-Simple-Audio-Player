@@ -134,7 +134,7 @@
     End Sub
 
 
-    Enum PlayerStates
+    Enum PlayerState
         Playing
         Stopped
         Stalled
@@ -154,19 +154,19 @@
             RaiseEvent MediaCompleted()
         End If
     End Sub
-    Function GetState() As PlayerStates
+    Function GetState() As PlayerState
         Select Case BASS_ChannelIsActive(stream)
             Case 0
-                Return PlayerStates.Stopped
+                Return PlayerState.Stopped
             Case 1
-                Return PlayerStates.Playing
+                Return PlayerState.Playing
             Case 2
-                Return PlayerStates.Stalled
+                Return PlayerState.Stalled
             Case 3
-                Return PlayerStates.Paused
+                Return PlayerState.Paused
         End Select
 
-        Return PlayerStates.Stopped
+        Return PlayerState.Stopped
     End Function
 
     Public Sub Dispose() Implements IDisposable.Dispose

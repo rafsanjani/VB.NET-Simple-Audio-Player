@@ -46,7 +46,7 @@ Public Class MainForm
     End Sub
 
     Private Sub PictureBox1_MouseEnter1(sender As Object, e As EventArgs) Handles playButton.MouseEnter
-        If MusicControl.GetState = Audio.PlayerStates.Stopped Or MusicControl.GetState = Audio.PlayerStates.Paused Then
+        If MusicControl.GetState = Audio.PlayerState.Stopped Or MusicControl.GetState = Audio.PlayerState.Paused Then
             playButton.Image = My.Resources.play_icon_pressed
         Else
             playButton.Image = My.Resources.paused_icon_pressed
@@ -55,7 +55,7 @@ Public Class MainForm
     End Sub
 
     Private Sub PictureBox1_MouseLeave1(sender As Object, e As EventArgs) Handles playButton.MouseLeave
-        If MusicControl.GetState = Audio.PlayerStates.Stopped Or MusicControl.GetState = Audio.PlayerStates.Paused Then
+        If MusicControl.GetState = Audio.PlayerState.Stopped Or MusicControl.GetState = Audio.PlayerState.Paused Then
             playButton.Image = My.Resources.play_icon_normal
         Else
             playButton.Image = My.Resources.paused_icon_normal
@@ -129,7 +129,7 @@ Public Class MainForm
 
     Private Sub ActivateItem()
         lblSongInfo.Left = _initPos
-        If MusicControl.GetState = Audio.PlayerStates.Playing Or MusicControl.GetState = Audio.PlayerStates.Paused Then
+        If MusicControl.GetState = Audio.PlayerState.Playing Or MusicControl.GetState = Audio.PlayerState.Paused Then
             MusicControl.StopMusic()
         End If
 
@@ -214,13 +214,13 @@ Public Class MainForm
     End Sub
 
     Private Sub OnPlay()
-        If MusicControl.GetState = Audio.PlayerStates.Playing Then
+        If MusicControl.GetState = Audio.PlayerState.Playing Then
             MusicControl.PauseMusic()
 
-        ElseIf MusicControl.GetState = Audio.PlayerStates.Paused Then
+        ElseIf MusicControl.GetState = Audio.PlayerState.Paused Then
             MusicControl.ResumeMusic()
 
-        ElseIf MusicControl.GetState = Audio.PlayerStates.Stopped Then
+        ElseIf MusicControl.GetState = Audio.PlayerState.Stopped Then
             'load selected item from playlist and start playing
             'CHECK WHETHER AN ITEM IS FOCUSED AND WHETHER THERE ARE ITEMS STILL IN THE PLAYLIST
             Try
@@ -276,7 +276,7 @@ Public Class MainForm
             Try
                 item = New ListViewItem(myMusic.GetTitle.ToString)
             Catch ex As Exception
-                MsgBox(ex.Message) ' for testing only
+                'MsgBox(ex.Message) ' for testing only
             End Try
 
             item.Tag = myMusic.GetFilePath
@@ -324,7 +324,7 @@ Public Class MainForm
 
     Private Sub bw_RunWorkerCompleted(sender As Object, e As RunWorkerCompletedEventArgs) Handles bw.RunWorkerCompleted
         'If there was no item in the playlist prior to the addition of these entries, start playing the first file
-        If _initPlaylistItemCount = 0 Then
+        If _initPlaylistItemCount = 0 And MusicControl.GetState() <> Audio.PlayerState.Playing Then
             _playingFileIndex = 0
             MusicControl.PlayMusic(lvPlaylist.Items(0).Tag.ToString)
         End If
@@ -476,9 +476,6 @@ Public Class MainForm
 
         Next
 
-
-        doc = Nothing
-        nl = Nothing
         GC.Collect()
         GC.WaitForPendingFinalizers()
 
@@ -493,7 +490,7 @@ Public Class MainForm
         My.Settings.PlayerState = MusicControl.GetState.ToString()
 
         SavePlaylist()
- 
+
     End Sub
 
     Private Sub SavePlaylist()
@@ -543,7 +540,6 @@ Public Class MainForm
                 lblSongInfo.Left = lblSongInfo.Left - 1
                 _moveRight = True
             Else
-                ' System.Threading.Thread.Sleep(5000)
                 _moveLeft = False
                 _moveRight = True
             End If
@@ -575,8 +571,8 @@ Public Class MainForm
 
         Dim dt, ds As TimeSpan
 
-        Dim secs As Int16
-        Dim mins As Int16
+        Dim secs As Short
+        Dim mins As Short
 
         dt = _currentMusic.GetDuration()
         ds = MusicControl.GetElapsedTime()
@@ -648,7 +644,7 @@ Public Class MainForm
 
     End Sub
 
-    
+
     Private Sub SetPrevItemColors()
         If lvPlaylist.Items.Count <> 0 Then
             lvPlaylist.Items(_playingFileIndex).BackColor = Color.Transparent
@@ -925,16 +921,14 @@ Public Class MainForm
     Private Sub DeleteItem()
         For Each item As ListViewItem In lvPlaylist.SelectedItems
             Try
-                If lvPlaylist.Items(_playingFileIndex).Tag.ToString = item.Tag.ToString Then
-
-                    MusicControl.StopMusic()
-                End If
+                'If lvPlaylist.Items(_playingFileIndex).Tag.ToString = item.Tag.ToString Then
+                '    MusicControl.StopMusic()
+                'End If
 
                 lvPlaylist.Items.Remove(item)
             Catch ex As Exception
                 MsgBox(ex.Message)
             End Try
-
         Next
     End Sub
 
@@ -954,7 +948,8 @@ Public Class MainForm
     End Sub
 
     Private Sub cmdBW_RunWorkerCompleted(sender As Object, e As RunWorkerCompletedEventArgs) Handles cmdBW.RunWorkerCompleted
-        If lvPlaylist.Items.Count = 1 Then
+
+        If lvPlaylist.Items.Count = 1 And MusicControl.GetState <> Audio.PlayerState.Playing Then
             MusicControl.PlayMusic(lvPlaylist.Items(0).Tag.ToString)
         End If
     End Sub
