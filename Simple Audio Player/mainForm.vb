@@ -2,6 +2,7 @@
 Imports System.IO
 Imports System.Text
 Imports System.Xml
+Imports Microsoft.VisualBasic.CompilerServices
 Imports Microsoft.VisualBasic.FileIO
 
 
@@ -10,6 +11,7 @@ Public Class MainForm
 
 
     Private _currentMusic As Music = Nothing
+    Const AppName As String = "Rafs Simple Audio Player"
 
     '    Public WithEvents lblSlideTimer As New System.Timers.Timer
 
@@ -24,7 +26,7 @@ Public Class MainForm
     ReadOnly _logouc As New Logo_UC
     ReadOnly _spectrum As New Spectrum_UC
     Dim _playingFileIndex As Integer = 0
-   
+
 
     Private Sub nextButton_MouseDown(sender As Object, e As MouseEventArgs) Handles nextButton.MouseDown
         nextButton.Top = nextButton.Top + 3
@@ -338,7 +340,7 @@ Public Class MainForm
         musicTimer.Enabled = False
 
         playButton.Image = My.Resources.play_icon_normal
-
+        Text = AppName + " - Paused"
     End Sub
 
     Private Sub MusicControl_MediaPlaying() Handles MusicControl.MediaPlaying
@@ -380,6 +382,7 @@ Public Class MainForm
             'SET SONG INFO TO JUST FILENAME
         End Try
 
+        Text = AppName + " - Playing"
     End Sub
 
     Private Sub MusicControl_MediaStopped() Handles MusicControl.MediaStopped
@@ -387,6 +390,7 @@ Public Class MainForm
         'RAISED WHEN THE PLAYING ITEM IS STOPPED EITHER BY ACTIVATING AN ITEM ON THE PLAYLIST OR BY CLICKING THE STOP BUTTON
 
         DoMediaStop()
+        Text = AppName + " - Stopped"
     End Sub
 
 
@@ -426,14 +430,45 @@ Public Class MainForm
 
         'PROCESS COMMAND LINE ARGUMENTS
         Dim cmdArgs As String() = Environment.GetCommandLineArgs()
+        'PreviousInstanceRunning()
+        'KillPreviousinstances()
 
         If cmdArgs.Length <> 1 Then
+            If PreviousInstanceRunning() Then
+                KillPreviousinstances()
+            End If
             cmdBW.RunWorkerAsync(cmdArgs)
         Else
             LoadSettings()
         End If
 
     End Sub
+
+    Private Function PreviousInstanceRunning() As Boolean
+        Dim x As Integer
+        For Each p As Process In Process.GetProcesses()
+            If p.ProcessName.Contains("Simple Audio Player") Then
+                x = x + 1
+            End If
+        Next
+
+        Return x > 1
+
+    End Function
+
+    Private Sub KillPreviousinstances()
+        For Each p In Process.GetProcesses()
+            Try
+                If p.MainWindowTitle.Contains("Stopped") Or p.MainWindowTitle.Contains("Playing") Or p.MainWindowTitle.Contains("Paused") Then
+                    p.Kill()
+                End If
+            Catch ex As Win32Exception
+
+            Catch ex As InvalidOperationException
+            End Try
+        Next p
+    End Sub
+
 
     Dim _moveRight As Boolean = False
     Dim _moveLeft As Boolean = True
@@ -586,7 +621,7 @@ Public Class MainForm
             mins = dt.Minutes
         End If
 
-        lblDuration.Text = ds.Minutes.ToString + ":" + ds.Seconds.ToString("D2") + "/" + mins.ToString + ":" + secs.ToString("D2")
+        lblDuration.Text = ds.Minutes.ToString + ":     " + ds.Seconds.ToString("D2") + "/" + mins.ToString + ":" + secs.ToString("D2")
 
         UpdateSlider()
     End Sub
