@@ -430,8 +430,8 @@ Public Class MainForm
 
         'PROCESS COMMAND LINE ARGUMENTS
         Dim cmdArgs As String() = Environment.GetCommandLineArgs()
-        'PreviousInstanceRunning()
-        'KillPreviousinstances()
+
+        'set the application's height to hide the playlist on startup
 
         If cmdArgs.Length <> 1 Then
             If PreviousInstanceRunning() Then
@@ -621,7 +621,7 @@ Public Class MainForm
             mins = dt.Minutes
         End If
 
-        lblDuration.Text = ds.Minutes.ToString + ":     " + ds.Seconds.ToString("D2") + "/" + mins.ToString + ":" + secs.ToString("D2")
+        lblDuration.Text = ds.Minutes.ToString + ":" + ds.Seconds.ToString("D2") + "/" + mins.ToString + ":" + secs.ToString("D2")
 
         UpdateSlider()
     End Sub
